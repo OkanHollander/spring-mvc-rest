@@ -1,6 +1,6 @@
-package mvcvcrest.repositories;
+package mvc.repositories;
 
-import mvcvcrest.domain.Category;
+import mvc.domain.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

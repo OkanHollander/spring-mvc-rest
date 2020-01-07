@@ -1,4 +1,4 @@
-package mvcvcrest.api.v1.model;
+package mvc.api.v1.model;
 
 /**
  * Author:   Okan Hollander

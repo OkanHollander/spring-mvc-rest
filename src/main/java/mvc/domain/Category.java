@@ -1,4 +1,4 @@
-package mvcvcrest.domain;
+package mvc.domain;
 
 import lombok.Data;
 
