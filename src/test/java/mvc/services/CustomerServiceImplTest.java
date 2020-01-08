@@ -119,5 +119,4 @@ public class CustomerServiceImplTest {
         assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
         assertEquals("/api/v1/customer/1", savedDto.getCustomerUrl());
     }
-
 }

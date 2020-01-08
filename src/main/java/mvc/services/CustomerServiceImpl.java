@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * Time:     07:45
  */
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerMapper customerMapper;
     private final CustomerRepository customerRepository;
@@ -91,7 +91,11 @@ public class CustomerServiceImpl implements CustomerService{
                         customer.setLastName(customerDTO.getLastName());
                     }
 
-                    return customerMapper.customerToCustomerDTO(customerRepository.save(customer));
+
+                    CustomerDTO returnDTO = customerMapper.customerToCustomerDTO(customer);
+                    returnDTO.setCustomerUrl("/api/v1/customers/" + id);
+
+                    return returnDTO;
                 }).orElseThrow(RuntimeException::new); // todo implement better Exception handling
     }
 }
