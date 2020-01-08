@@ -99,12 +99,16 @@ public class CustomerControllerTest extends AbstractRestController{
         when(customerService.createNewCustomer(customer)).thenReturn(returnDTO);
 
         //when/then
-        mockMvc.perform(post("/api/v1/customers/")
+//        String response =
+                mockMvc.perform(post("/api/v1/customers/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
+//                .andReturn().getResponse().getContentAsString();
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.firstName", equalTo("Fred")))
                 .andExpect(jsonPath("$.customer_url", equalTo("/api/v1/customers/1")));
+
+//        System.out.println(response);
     }
 
 }
