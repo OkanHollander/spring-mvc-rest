@@ -6,6 +6,7 @@ import mvc.bootstrap.DataLoader;
 import mvc.domain.Customer;
 import mvc.repositories.CategoryRepository;
 import mvc.repositories.CustomerRepository;
+import mvc.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,9 @@ public class CustomerServiceIT {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    VendorRepository vendorRepository;
+
     CustomerService customerService;
 
     @Before
@@ -44,7 +48,7 @@ public class CustomerServiceIT {
         System.out.println(customerRepository.findAll().size());
 
         //setup data for testing
-        DataLoader bootstrap = new DataLoader(categoryRepository, customerRepository);
+        DataLoader bootstrap = new DataLoader(categoryRepository, customerRepository, vendorRepository);
         bootstrap.run(); //load data
 
         customerService = new CustomerServiceImpl(CustomerMapper.INSTANCE, customerRepository);
