@@ -2,6 +2,7 @@ package mvc.services;
 
 import mvc.api.v1.mapper.CustomerMapper;
 import mvc.api.v1.model.CustomerDTO;
+import mvc.controllers.v1.CustomerController;
 import mvc.domain.Customer;
 import mvc.repositories.CustomerRepository;
 import org.junit.Before;
@@ -95,7 +96,7 @@ public class CustomerServiceImplTest {
 
         //then
         assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
-        assertEquals("/api/v1/customer/1", savedDto.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + 1, savedDto.getCustomerUrl());
     }
 
     @Test
@@ -117,7 +118,7 @@ public class CustomerServiceImplTest {
 
         //then
         assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
-        assertEquals("/api/v1/customer/1", savedDto.getCustomerUrl());
+        assertEquals(CustomerController.BASE_URL + 1, savedDto.getCustomerUrl());
     }
 
     @Test

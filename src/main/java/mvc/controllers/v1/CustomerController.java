@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
  * Time:     07:50
  */
 @Controller
-@RequestMapping("/api/v1/customers/")
+@RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
 
+    public static final String BASE_URL = "/api/v1/customers/";
+    public static final String ID = "{id}";
     private final CustomerService customerService;
 
     @Autowired
@@ -31,7 +33,7 @@ public class CustomerController {
                 new CustomerListDTO(customerService.getAllCustomers()), HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping(CustomerController.ID)
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable Long id) {
         return new ResponseEntity<CustomerDTO>(customerService.getCustomerById(id), HttpStatus.OK);
     }
@@ -41,17 +43,17 @@ public class CustomerController {
         return new ResponseEntity<CustomerDTO>(customerService.createNewCustomer(customerDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("{id}")
+    @PutMapping(CustomerController.ID)
     public ResponseEntity<CustomerDTO> saveCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
         return new ResponseEntity<CustomerDTO>(customerService.saveCustomerByDto(id, customerDTO), HttpStatus.OK);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping(CustomerController.ID)
     public ResponseEntity<CustomerDTO> patchCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
         return new ResponseEntity<CustomerDTO>(customerService.patchCustomer(id, customerDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(CustomerController.ID)
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomerById(id);
         return new ResponseEntity<Void>(HttpStatus.OK);
