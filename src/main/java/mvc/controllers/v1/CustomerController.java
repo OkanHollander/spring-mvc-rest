@@ -1,5 +1,7 @@
 package mvc.controllers.v1;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import mvc.api.v1.model.CustomerDTO;
 import mvc.api.v1.model.CustomerListDTO;
 import mvc.services.CustomerService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Date:     08/01/2020
  * Time:     07:50
  */
+@Api(description = "This is my custom Controller")
 @RestController
 @RequestMapping(CustomerController.BASE_URL)
 public class CustomerController {
@@ -25,6 +28,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
+    @ApiOperation(value = "This will get a list of customers.", notes = "These are some notes about the API.")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public CustomerListDTO getAllCustomers() {
