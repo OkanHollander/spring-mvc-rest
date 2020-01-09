@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
  * Time:     08:24
  */
 public class CustomerMapperTest {
-    public static final Long ID = 1L;
     public static final String FIRST_NAME = "Joe";
     public static final String LAST_NAME = "Buck";
 
@@ -22,7 +21,6 @@ public class CustomerMapperTest {
     public void customerToCustomerDTO() throws Exception{
         // given
         Customer customer = new Customer();
-        customer.setId(ID);
         customer.setFirstName(FIRST_NAME);
         customer.setLastName(LAST_NAME);
 
@@ -30,7 +28,6 @@ public class CustomerMapperTest {
         CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
 
         // then
-        assertEquals(ID, customerDTO.getId());
         assertEquals(FIRST_NAME, customerDTO.getFirstName());
         assertEquals(LAST_NAME, customerDTO.getLastName());
     }
@@ -39,7 +36,6 @@ public class CustomerMapperTest {
     public void customerDTOtoCustomer() {
         // given
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setId(ID);
         customerDTO.setFirstName(FIRST_NAME);
         customerDTO.setLastName(LAST_NAME);
 
@@ -47,7 +43,6 @@ public class CustomerMapperTest {
         Customer customer = customerMapper.customerDTOtoCustomer(customerDTO);
 
         // then
-        assertEquals(ID, customer.getId());
         assertEquals(FIRST_NAME, customer.getFirstName());
         assertEquals(LAST_NAME, customer.getLastName());
     }
