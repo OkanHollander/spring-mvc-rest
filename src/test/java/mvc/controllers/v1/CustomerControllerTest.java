@@ -1,7 +1,9 @@
 package mvc.controllers.v1;
 
 import mvc.api.v1.model.CustomerDTO;
+import mvc.controllers.RestResponseEntityExceptionHandler;
 import mvc.services.CustomerService;
+import mvc.services.ResourceNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -42,7 +44,8 @@ public class CustomerControllerTest extends AbstractRestController{
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(customerController).setControllerAdvice(
+                new RestResponseEntityExceptionHandler()).build();
     }
 
     @Test
@@ -65,6 +68,16 @@ public class CustomerControllerTest extends AbstractRestController{
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", hasSize(2)));
+    }
+
+    @Test
+    public void testNotFoundException() throws Exception {
+
+        when(customerService.getCustomerById(anyLong())).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(get(CustomerController.BASE_URL + "/222")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test
