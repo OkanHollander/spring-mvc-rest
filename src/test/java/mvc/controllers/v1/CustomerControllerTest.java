@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Date:     08/01/2020
  * Time:     08:41
  */
-public class CustomerControllerTest extends AbstractRestController{
+public class CustomerControllerTest extends AbstractRestController {
 
     @Mock
     CustomerService customerService;
@@ -65,6 +65,7 @@ public class CustomerControllerTest extends AbstractRestController{
         when(customerService.getAllCustomers()).thenReturn(Arrays.asList(customer1, customer2));
 
         mockMvc.perform(get("/api/v1/customers/")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customers", hasSize(2)));
@@ -93,6 +94,7 @@ public class CustomerControllerTest extends AbstractRestController{
 
         //when
         mockMvc.perform(get(CustomerController.BASE_URL + 1)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", equalTo("Michale")));
@@ -114,7 +116,8 @@ public class CustomerControllerTest extends AbstractRestController{
 
         //when/then
 //        String response =
-                mockMvc.perform(post(CustomerController.BASE_URL)
+        mockMvc.perform(post(CustomerController.BASE_URL)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
 //                .andReturn().getResponse().getContentAsString();
@@ -141,6 +144,7 @@ public class CustomerControllerTest extends AbstractRestController{
 
         //when/then
         mockMvc.perform(put(CustomerController.BASE_URL + 1)
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
@@ -164,6 +168,7 @@ public class CustomerControllerTest extends AbstractRestController{
         when(customerService.patchCustomer(anyLong(), any(CustomerDTO.class))).thenReturn(returnDTO);
 
         mockMvc.perform(patch("/api/v1/customers/1")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
                 .andExpect(status().isOk())
